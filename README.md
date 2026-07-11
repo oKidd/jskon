@@ -1,33 +1,48 @@
 # Jskon
 
-Jskon is a small Skript addon for working with JSON.
+Jskon turns JSON into Skript lists.
 
-It gives you one way to use JSON in Skript:
+## What it does
 
-- read flattened JSON values with `json from %string%`
+It takes JSON text and flattens it into Skript-friendly list values.
 
 ## Requirements
 
 - Paper
 - Skript
 
-## Syntax
+## Quick use
 
-### Expression
+If you already have JSON as text, use this:
 
 ```skript
-json from %string%
+set {_json::*} to json from {_input}
 ```
 
-Use this when you want to read JSON data as a list of values.
+That gives you the JSON values in a list.
 
-## How JSON is flattened
+## Example
 
-Jskon turns JSON into Skript-friendly paths:
+```skript
+command /jskontest:
+    trigger:
+        set {_input} to "{""age"":15,""catchphrase"":""heeyaw"",""nicknames"":[""ftaang"",""bleh""]}"
+        set {_json::*} to json from {_input}
+
+        send "&7Value count: %size of {_json::*}%"
+        send "&aAge: %{_json::age}%"
+        send "&aCatchphrase: %{_json::catchphrase}%"
+        send "&aNickname 1: %{_json::nicknames::1}%"
+        send "&aNickname 2: %{_json::nicknames::2}%"
+```
+
+## How the data is shaped
+
+Jskon flattens JSON so it is easy to use in Skript:
 
 - object keys use `::`
 - array indexes start at `1`
-- nested data becomes deeper paths
+- nested data adds more `::`
 
 Example:
 
@@ -41,39 +56,12 @@ Example:
 }
 ```
 
-Becomes paths like:
+Becomes:
 
 - `player::name`
 - `player::level`
 - `tags::1`
 - `tags::2`
-
-## Examples
-
-### Example 1: Read JSON values
-
-Use `json from %string%` when you only want to read the values.
-
-```skript
-command /jskontest:
-    trigger:
-        set {_input} to "{""age"":15,""catchphrase"":""heeyaw"",""nicknames"":[""ftaang"",""bleh""]}"
-        set {_json::*} to json from {_input}
-
-        send "&7Root size: %size of {_json::*}%"
-        send "&aAge: %{_json::age}%"
-        send "&aCatchphrase: %{_json::catchphrase}%"
-        send "&aNickname 1: %{_json::nicknames::1}%"
-        send "&aNickname 2: %{_json::nicknames::2}%"
-
-        send "&7--- Root values ---"
-        loop {_json::*}:
-            send "&e%loop-index% = %loop-value%"
-
-        send "&7--- Nicknames ---"
-        loop {_json::nicknames::*}:
-            send "&b%loop-index% = %loop-value%"
-```
 
 ## Notes
 
