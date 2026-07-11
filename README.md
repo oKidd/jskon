@@ -2,10 +2,9 @@
 
 Jskon is a small Skript addon for working with JSON.
 
-It gives you two ways to use JSON in Skript:
+It gives you one way to use JSON in Skript:
 
 - read flattened JSON values with `json from %string%`
-- copy JSON directly into variables with `copy json %string% into %objects%`
 
 ## Requirements
 
@@ -21,15 +20,6 @@ json from %string%
 ```
 
 Use this when you want to read JSON data as a list of values.
-
-### Effect
-
-```skript
-copy json %string% to %objects%
-copy json %string% into %objects%
-```
-
-Use this when you want to store JSON data into variables.
 
 ## How JSON is flattened
 
@@ -85,29 +75,8 @@ command /jskontest:
             send "&b%loop-index% = %loop-value%"
 ```
 
-### Example 2: Copy JSON into variables
-
-Use `copy json ... into ...` when you want to store the JSON into a variable tree.
-
-```skript
-command /jskonraw:
-    trigger:
-        copy json "{""id"":1,""name"":""oKidd"",""tags"":[""mc"",""skript""]}" into {_profile::*}
-
-        send "&7Root size: %size of {_profile::*}%"
-        send "&aID: %{_profile::id}%"
-        send "&aName: %{_profile::name}%"
-        send "&aTag 1: %{_profile::tags::1}%"
-        send "&aTag 2: %{_profile::tags::2}%"
-
-        send "&7--- Stored values ---"
-        loop {_profile::*}:
-            send "&e%loop-index% = %loop-value%"
-```
-
 ## Notes
 
 - Invalid JSON is ignored.
 - Empty input is ignored.
 - `null` values are stored as `<none>`.
-

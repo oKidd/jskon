@@ -1,8 +1,10 @@
 /build/
+/target/
 /.gradle/
 /dist/
 /out/
 /*.jar
+*.class
 .idea/
 .vscode/
 *.iml
