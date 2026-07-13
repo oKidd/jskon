@@ -5,7 +5,7 @@
 
     <groupId>me.felipe</groupId>
     <artifactId>jskon</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <name>Jskon</name>
     <description>Skript addon for working with JSON</description>
 

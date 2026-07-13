@@ -2,7 +2,6 @@ package me.felipe.jskon.json;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -25,8 +24,7 @@ public final class JsonFlattener {
     }
 
     private static void flattenInto(List<Entry> entries, String path, JsonElement element) {
-        if (element == null || element instanceof JsonNull || element.isJsonNull()) {
-            entries.add(new Entry(path, "<none>"));
+        if (element == null || element.isJsonNull()) {
             return;
         }
 

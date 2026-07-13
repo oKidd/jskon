@@ -67,4 +67,4 @@ Becomes:
 
 - Invalid JSON is ignored.
 - Empty input is ignored.
-- `null` values are stored as `<none>`.
+- `null` values are omitted from the result.
